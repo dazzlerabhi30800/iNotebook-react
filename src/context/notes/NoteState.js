@@ -4,7 +4,7 @@ import {useState} from "react";
 
 const NoteState = (props) => {
     const host = "http://localhost:5000"
-    const notesInitial = [ ]
+    const notesInitial = []
       const [notes, setNotes] = useState(notesInitial)
 
       // Get all Notes
@@ -31,7 +31,7 @@ const NoteState = (props) => {
           method: 'POST', // *GET, POST, PUT, DELETE, etc.
           headers: {
             'Content-Type': 'application/json',
-            "auth-token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFiOGE0N2Q4MjljMTgxNTc0YWE5NGE5In0sImlhdCI6MTYzOTY2NzE0MH0.2Deu4Mh5m0rLKMtLZknKzF42ZRx9ony6T4w7l93-udQ"
+            "auth-token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFiOGE0N2Q4MjljMTgxNTc0YWE5NGE5In0sImlhdCI6MTYzOTQ5MzEyM30.OCkyS7z-9mJUVmTXYAQ0C1TcSdwW08QcHiNxxgnD6yI"
           },
           body: JSON.stringify({title, description, tag}) 
         });
@@ -48,8 +48,18 @@ const NoteState = (props) => {
         setNotes(notes.concat(note))
       }
       // Delete a note
-      const deleteNote = (id) => {
+      const deleteNote = async (id) => {
           //TODO: API Call
+          const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+            method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+              'Content-Type': 'application/json',
+              "auth-token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFiOGE0N2Q4MjljMTgxNTc0YWE5NGE5In0sImlhdCI6MTYzOTY2NzE0MH0.2Deu4Mh5m0rLKMtLZknKzF42ZRx9ony6T4w7l93-udQ"
+            },
+          });
+          const json = response.json();
+          console.log(json)
+        
           console.log("Deleting the note with id:", id);
           const newNotes = notes.filter((note)=> {return note._id!==id});
           setNotes(newNotes);
