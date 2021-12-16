@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+i {
+  cursor : pointer;
+  transition : .2s ease;
+}
+i:hover {
+  color : rgb(240, 14, 127);
+  font-size : 1.4rem;
+}
+.fa-edit:hover {
+  color : rgb(77, 20, 235);
+}
+
